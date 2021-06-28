@@ -19,4 +19,9 @@ public class IndexControllerIT extends BaseIT {
         mockMvc.perform(get("/beers/find" ))
                 .andExpect(status().isOk());
     }
+    @Test
+    void findBeerByUpc() throws Exception{
+        mockMvc.perform(get("/api/v1/beerUpc/0631234200036"))
+                .andExpect(status().isOk());
+    }
 }
