@@ -1,8 +1,14 @@
 package guru.sfg.brewery.domain.security;
 
+import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Authority {
     @Id
@@ -11,6 +17,7 @@ public class Authority {
 
     private String role;
 
+    @Singular
     @ManyToMany(mappedBy = "authorities")
     private Set<User> users;
 }
