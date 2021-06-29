@@ -3,6 +3,7 @@ package guru.sfg.brewery.domain.security;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Setter
