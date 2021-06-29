@@ -28,7 +28,6 @@ public class BeerControllerIT extends BaseIT{
                 .andExpect(view().name("beers/createBeer"))
                 .andExpect(model().attributeExists("beer"));
     }
-
     @WithMockUser("spring")
     @Test
     void findBeers() throws Exception{
@@ -44,5 +43,4 @@ public class BeerControllerIT extends BaseIT{
                 .andExpect(view().name("beers/findBeers"))
                 .andExpect(model().attributeExists("beer"));
     }
-
 }

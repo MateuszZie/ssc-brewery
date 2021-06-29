@@ -14,6 +14,7 @@ public class MateuszPasswordEncoder {
         String encodingId = "bcrypt";
         Map<String, PasswordEncoder> encoders = new HashMap();
         encoders.put(encodingId, new BCryptPasswordEncoder());
+        encoders.put("bcrypt15", new BCrypt15PasswordEncoder());
         encoders.put("ldap", new LdapShaPasswordEncoder());
         encoders.put("noop", NoOpPasswordEncoder.getInstance());
         encoders.put("sha256", new StandardPasswordEncoder());
