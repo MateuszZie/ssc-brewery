@@ -25,9 +25,9 @@ public class SecurityBootstrap implements CommandLineRunner {
     }
 
     private void loadData(){
-        Authority user = Authority.builder().role("USER").build();
-        Authority admin = Authority.builder().role("ADMIN").build();
-        Authority customer = Authority.builder().role("CUSTOMER").build();
+        Authority user = Authority.builder().role("ROLE_USER").build();
+        Authority admin = Authority.builder().role("ROLE_ADMIN").build();
+        Authority customer = Authority.builder().role("ROLE_CUSTOMER").build();
 
        Authority savedUser =authorityRepository.save(user);
        Authority savedAdmin =authorityRepository.save(admin);
