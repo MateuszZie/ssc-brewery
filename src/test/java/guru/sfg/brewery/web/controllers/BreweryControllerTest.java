@@ -23,7 +23,7 @@ class BreweryControllerTest extends BaseIT{
     void getBreweriesJsonWithOutCustomerRole() throws Exception{
         mockMvc.perform(get("/brewery/api/v1/breweries")
                 .with(httpBasic("spring","mateusz")))
-                .andExpect(status().isForbidden());
+                .andExpect(status().is2xxSuccessful());
 
     }
     @Test
