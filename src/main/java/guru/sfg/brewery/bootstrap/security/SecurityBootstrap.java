@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 @Component
@@ -37,13 +38,24 @@ public class SecurityBootstrap implements CommandLineRunner {
         Authority readBeer = Authority.builder().permission("read.beer").build();
         Authority deleteBeer = Authority.builder().permission("delete.beer").build();
 
+        Authority createCustomer = Authority.builder().permission("create.Customer").build();
+        Authority updateCustomer = Authority.builder().permission("update.Customer").build();
+        Authority readCustomer = Authority.builder().permission("read.Customer").build();
+        Authority deleteCustomer = Authority.builder().permission("delete.Customer").build();
+
+        Authority createBrewery = Authority.builder().permission("create.Brewery").build();
+        Authority updateBrewery = Authority.builder().permission("update.Brewery").build();
+        Authority readBrewery = Authority.builder().permission("read.Brewery").build();
+        Authority deleteBrewery = Authority.builder().permission("delete.Brewery").build();
+
         Role adminRole = roleRepository.save(Role.builder().name("ADMIN_ROLE").build());
         Role userRole = roleRepository.save(Role.builder().name("USER_ROLE").build());
         Role customerRole = roleRepository.save(Role.builder().name("CUSTOMER_ROLE").build());
 
-        adminRole.setAuthorities(Set.of(readBeer,deleteBeer,updateBeer,createBeer));
-        userRole.setAuthorities(Set.of(readBeer));
-        customerRole.setAuthorities(Set.of(readBeer));
+        adminRole.setAuthorities(new HashSet<>(Set.of(readBeer,deleteBeer,updateBeer,createBeer,createBrewery,createCustomer,updateBrewery,
+                updateCustomer, readBrewery, readCustomer, deleteBrewery, deleteCustomer)));
+        userRole.setAuthorities(new HashSet(Set.of(readBeer)));
+        customerRole.setAuthorities(new HashSet(Set.of(readBeer, readBrewery, readCustomer)));
 
         roleRepository.saveAll(Arrays.asList(adminRole,userRole,customerRole));
 
