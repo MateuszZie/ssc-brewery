@@ -17,26 +17,11 @@ import java.util.stream.Stream;
 
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 
-public abstract class BaseIT {
+public abstract class BaseITJpa {
     @Autowired
     WebApplicationContext wac;
 
     public MockMvc mockMvc;
-
-    @MockBean
-    BeerRepository beerRepository;
-
-    @MockBean
-    BeerInventoryRepository beerInventoryRepository;
-
-    @MockBean
-    BreweryService breweryService;
-
-    @MockBean
-    CustomerRepository customerRepository;
-
-    @MockBean
-    BeerService beerService;
 
     @BeforeEach
     public void setup() {
