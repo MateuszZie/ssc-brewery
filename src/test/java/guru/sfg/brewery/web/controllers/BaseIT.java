@@ -50,4 +50,9 @@ public abstract class BaseIT {
                 Arguments.of("scott", "tiger"),
                 Arguments.of("user", "password"));
     }
+
+    public static Stream<Arguments> getStreamAllMinusUser() {
+        return Stream.of(Arguments.of("spring" , "mateusz"),
+                Arguments.of("scott", "tiger"));
+    }
 }
