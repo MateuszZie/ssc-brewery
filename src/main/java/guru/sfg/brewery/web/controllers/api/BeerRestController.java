@@ -27,6 +27,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.ConstraintViolationException;
@@ -102,7 +104,6 @@ public class BeerRestController {
 
         return new ResponseEntity(httpHeaders, HttpStatus.CREATED);
     }
-
     @PutMapping(path = {"beer/{beerId}"}, produces = { "application/json" })
     public ResponseEntity updateBeer(@PathVariable("beerId") UUID beerId, @Valid @RequestBody BeerDto beerDto){
 
@@ -110,7 +111,7 @@ public class BeerRestController {
 
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping({"beer/{beerId}"})
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBeer(@PathVariable("beerId") UUID beerId){
