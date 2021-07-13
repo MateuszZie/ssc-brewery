@@ -2,7 +2,11 @@ package guru.sfg.brewery.web.controllers.api;
 
 
 import guru.sfg.brewery.web.controllers.BaseIT;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.boot.test.context.SpringBootTest;
 
 
@@ -12,6 +16,23 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @SpringBootTest
 public class BeerRestControllerIT extends BaseIT {
+
+    @DisplayName("Check Ups")
+    @Nested
+    class BeerUpsTest{
+        @Test
+        void findBeerUpcNoAuth() throws Exception{
+            mockMvc.perform(get("/api/v1/beerUpc/97df0c39-90c4-4ae0-b663-453e8e19c311"))
+                    .andExpect(status().isUnauthorized());
+        }
+        @ParameterizedTest(name = "#{index} with [{arguments}]")
+        @MethodSource("guru.sfg.brewery.web.controllers.BaseIT#getStreamAllUsers")
+        void findBeerUpcAdmin(String user, String pwd) throws Exception{
+            mockMvc.perform(get("/api/v1/beerUpc/97df0c39-90c4-4ae0-b663-453e8e19c311")
+                    .with(httpBasic(user, pwd)))
+                    .andExpect(status().is2xxSuccessful());
+        }
+    }
 
     @Test
     void deleteBeerHttpBasic() throws Exception{

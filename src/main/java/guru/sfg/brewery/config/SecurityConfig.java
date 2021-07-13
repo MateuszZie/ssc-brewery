@@ -46,11 +46,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     authorize
                             .antMatchers("/h2-console/**").permitAll()
                             .antMatchers("/","/webjars/**","/login","/resources/**").permitAll()
-                            .antMatchers("/beers/find","/beers*").permitAll()
+                            .antMatchers("/beers/find","/beers*").hasAnyRole("ADMIN","CUSTOMER","USER")
                             .antMatchers(HttpMethod.GET ,"/api/v1/beer/**").permitAll()
                             .mvcMatchers(HttpMethod.DELETE,"/api/v1/beer/**").hasRole("ADMIN")
                             .mvcMatchers(HttpMethod.GET, "/brewery/api/v1/breweries").hasAnyRole("ADMIN","CUSTOMER")
-                            .mvcMatchers(HttpMethod.GET, "/api/v1/beerUpc/{upc}").permitAll();
+                            .mvcMatchers(HttpMethod.GET, "/api/v1/beerUpc/{upc}").hasAnyRole("ADMIN","CUSTOMER","USER");
                 })
                 .authorizeRequests()
                 .anyRequest().authenticated()
