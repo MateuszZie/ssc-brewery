@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -23,6 +24,7 @@ public class SecurityBootstrap implements CommandLineRunner {
     private final AuthorityRepository authorityRepository;
     private final UserRepository userRepository;
 
+    @Transactional
     @Override
     public void run(String... args) throws Exception {
 
@@ -33,20 +35,20 @@ public class SecurityBootstrap implements CommandLineRunner {
 
     private void loadData(){
 
-        Authority createBeer = Authority.builder().permission("create.beer").build();
-        Authority updateBeer = Authority.builder().permission("update.beer").build();
-        Authority readBeer = Authority.builder().permission("read.beer").build();
-        Authority deleteBeer = Authority.builder().permission("delete.beer").build();
+        Authority createBeer = authorityRepository.save(Authority.builder().permission("create.beer").build());
+        Authority updateBeer = authorityRepository.save(Authority.builder().permission("update.beer").build());
+        Authority readBeer = authorityRepository.save(Authority.builder().permission("read.beer").build());
+        Authority deleteBeer = authorityRepository.save(Authority.builder().permission("delete.beer").build());
 
-        Authority createCustomer = Authority.builder().permission("create.Customer").build();
-        Authority updateCustomer = Authority.builder().permission("update.Customer").build();
-        Authority readCustomer = Authority.builder().permission("read.Customer").build();
-        Authority deleteCustomer = Authority.builder().permission("delete.Customer").build();
+        Authority createCustomer = authorityRepository.save(Authority.builder().permission("create.Customer").build());
+        Authority updateCustomer = authorityRepository.save(Authority.builder().permission("update.Customer").build());
+        Authority readCustomer = authorityRepository.save(Authority.builder().permission("read.Customer").build());
+        Authority deleteCustomer = authorityRepository.save(Authority.builder().permission("delete.Customer").build());
 
-        Authority createBrewery = Authority.builder().permission("create.Brewery").build();
-        Authority updateBrewery = Authority.builder().permission("update.Brewery").build();
-        Authority readBrewery = Authority.builder().permission("read.Brewery").build();
-        Authority deleteBrewery = Authority.builder().permission("delete.Brewery").build();
+        Authority createBrewery = authorityRepository.save(Authority.builder().permission("create.Brewery").build());
+        Authority updateBrewery = authorityRepository.save(Authority.builder().permission("update.Brewery").build());
+        Authority readBrewery = authorityRepository.save(Authority.builder().permission("read.Brewery").build());
+        Authority deleteBrewery = authorityRepository.save(Authority.builder().permission("delete.Brewery").build());
 
         Role adminRole = roleRepository.save(Role.builder().name("ADMIN_ROLE").build());
         Role userRole = roleRepository.save(Role.builder().name("USER_ROLE").build());

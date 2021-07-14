@@ -92,12 +92,12 @@ public class BeerRestControllerIT extends BaseIT {
     @Test
     void findBeers() throws Exception{
         mockMvc.perform(get("/api/v1/beer/"))
-                .andExpect(status().isOk());
+                .andExpect(status().isUnauthorized());
     }
 
     @Test
     void findBeerById() throws Exception{
         mockMvc.perform(get("/api/v1/beer/97df0c39-90c4-4ae0-b663-453e8e19c311"))
-                .andExpect(status().isOk());
+                .andExpect(status().isUnauthorized());
     }
 }
