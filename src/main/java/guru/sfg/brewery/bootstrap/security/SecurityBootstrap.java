@@ -56,8 +56,8 @@ public class SecurityBootstrap implements CommandLineRunner {
 
         adminRole.setAuthorities(new HashSet<>(Set.of(readBeer,deleteBeer,updateBeer,createBeer,createBrewery,createCustomer,updateBrewery,
                 updateCustomer, readBrewery, readCustomer, deleteBrewery, deleteCustomer)));
-        userRole.setAuthorities(new HashSet(Set.of(readBeer)));
-        customerRole.setAuthorities(new HashSet(Set.of(readBeer, readBrewery, readCustomer)));
+        userRole.setAuthorities(new HashSet(Set.of(readBeer,createBeer)));
+        customerRole.setAuthorities(new HashSet(Set.of(readBeer, readBrewery, readCustomer,createBeer)));
 
         roleRepository.saveAll(Arrays.asList(adminRole,userRole,customerRole));
 
