@@ -1,9 +1,12 @@
 package guru.sfg.brewery.domain.security;
 
 import lombok.*;
+import org.springframework.security.core.CredentialsContainer;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -13,7 +16,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Builder
 @Entity
-public class User {
+public class User implements UserDetails, CredentialsContainer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,10 +31,14 @@ public class User {
     @Transient
     private  Set<Authority> authorities;
 
-    public Set<Authority> getAuthorities() {
+    @Transient
+    public Set<GrantedAuthority> getAuthorities() {
         return this.roles.stream()
                 .map(Role::getAuthorities)
                 .flatMap(Set::stream)
+                .map(authority -> {
+                    return new SimpleGrantedAuthority(authority.getPermission());
+                })
                 .collect(Collectors.toSet());
     }
 
@@ -48,4 +55,9 @@ public class User {
     private  boolean credentialsNonExpired =true;
     @Builder.Default
     private  boolean enabled =true;
+
+    @Override
+    public void eraseCredentials() {
+        this.password = null;
+    }
 }
