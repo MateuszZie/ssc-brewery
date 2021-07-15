@@ -47,7 +47,7 @@ public class User implements UserDetails, CredentialsContainer {
     }
 
     @Singular
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = {CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(name = "User_Role", joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID",referencedColumnName = "ID")})
     private  Set<Role> roles;
