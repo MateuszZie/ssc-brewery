@@ -1,5 +1,6 @@
 package guru.sfg.brewery.domain.security;
 
+import guru.sfg.brewery.domain.Customer;
 import lombok.*;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,6 +24,9 @@ public class User implements UserDetails, CredentialsContainer {
     private Integer id;
     private  String password;
     private  String username;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Customer customer;
 
 //    @Singular
 //    @ManyToMany(cascade = CascadeType.MERGE)
