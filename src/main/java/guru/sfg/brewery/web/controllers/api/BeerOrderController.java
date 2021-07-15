@@ -1,5 +1,7 @@
 package guru.sfg.brewery.web.controllers.api;
 
+import guru.sfg.brewery.security.perms.CreateOrderPermission;
+import guru.sfg.brewery.security.perms.ReadOrderPermission;
 import guru.sfg.brewery.services.BeerOrderService;
 import guru.sfg.brewery.web.model.BeerOrderDto;
 import guru.sfg.brewery.web.model.BeerOrderPagedList;
@@ -23,8 +25,7 @@ public class BeerOrderController {
         this.beerOrderService = beerOrderService;
     }
 
-    @PreAuthorize("hasAuthority('read.order') OR hasAuthority('read.order.customer') " +
-            "AND @beerOrderAuthenticationManager.CustomerIDMatcher(authentication, #customerId)" )
+    @ReadOrderPermission
     @GetMapping("orders")
     public BeerOrderPagedList listOrders(@PathVariable("customerId") UUID customerId,
                                          @RequestParam(value = "pageNumber", required = false) Integer pageNumber,
@@ -40,14 +41,13 @@ public class BeerOrderController {
 
         return beerOrderService.listOrders(customerId, PageRequest.of(pageNumber, pageSize));
     }
-
+    @CreateOrderPermission
     @PostMapping("orders")
     @ResponseStatus(HttpStatus.CREATED)
     public BeerOrderDto placeOrder(@PathVariable("customerId") UUID customerId, @RequestBody BeerOrderDto beerOrderDto){
         return beerOrderService.placeOrder(customerId, beerOrderDto);
     }
-    @PreAuthorize("hasAuthority('read.order') OR hasAuthority('read.order.customer') " +
-            "AND @beerOrderAuthenticationManager.CustomerIDMatcher(authentication, #customerId)" )
+    @ReadOrderPermission
     @GetMapping("orders/{orderId}")
     public BeerOrderDto getOrder(@PathVariable("customerId") UUID customerId, @PathVariable("orderId") UUID orderId){
         return beerOrderService.getOrderById(customerId, orderId);
