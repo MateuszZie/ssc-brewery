@@ -1,8 +1,10 @@
 package guru.sfg.brewery.web.controllers;
 
+import com.warrenstrange.googleauth.GoogleAuthenticator;
 import guru.sfg.brewery.repositories.BeerInventoryRepository;
 import guru.sfg.brewery.repositories.BeerRepository;
 import guru.sfg.brewery.repositories.CustomerRepository;
+import guru.sfg.brewery.security.google.Google2faFilter;
 import guru.sfg.brewery.services.BeerOrderService;
 import guru.sfg.brewery.services.BeerService;
 import guru.sfg.brewery.services.BreweryService;
@@ -41,6 +43,7 @@ public abstract class BaseIT {
 
     @MockBean
     BeerOrderService beerOrderService;
+
 
     @BeforeEach
     public void setup() {

@@ -2,6 +2,7 @@ package guru.sfg.brewery.web.controllers.api;
 
 
 import guru.sfg.brewery.web.controllers.BaseIT;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
+@Disabled
 @SpringBootTest
 public class BeerRestControllerIT extends BaseIT {
 

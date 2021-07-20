@@ -30,8 +30,8 @@ public class UserController {
         return "user/register2fa";
     }
 
-    @PostMapping
-    public String confirm2fa(@PathVariable Integer verifyCode){
+    @PostMapping("/register2fa")
+    public String confirm2fa(@RequestParam Integer verifyCode){
         User user = getUser();
 
         log.debug("Entered Code is:" + verifyCode);
@@ -49,7 +49,7 @@ public class UserController {
         return "user/verify2fa";
     }
 
-    @PostMapping
+    @PostMapping("/verify2fa")
     public String verifyPostOf2Fa(@RequestParam Integer verifyCode){
         User user = getUser();
 
