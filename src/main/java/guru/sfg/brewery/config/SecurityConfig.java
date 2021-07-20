@@ -21,9 +21,9 @@ import org.springframework.security.web.session.SessionManagementFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @RequiredArgsConstructor
-@Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@Configuration
+//@EnableWebSecurity
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
@@ -35,10 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new SecurityEvaluationContextExtension();
     }
 
-    @Bean
-    PasswordEncoder passwordEncoder(){
-        return MateuszPasswordEncoder.createDelegatingPasswordEncoder();
-    }
+
 
 
     public RestHeaderAuthFilter restHeaderAuthFilter(AuthenticationManager authenticationManager){

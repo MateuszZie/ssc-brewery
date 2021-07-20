@@ -27,7 +27,7 @@ public abstract class BaseITJpa {
     public void setup() {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(wac)
-                .apply(springSecurity())
+//                .apply(springSecurity())
                 .build();
     }
     public static Stream<Arguments> getStreamAllUsers() {
